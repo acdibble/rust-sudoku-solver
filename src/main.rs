@@ -71,8 +71,8 @@ fn load_puzzle() -> Result<Board, std::io::Error> {
     File::open("input.txt")?.read_to_string(&mut input)?;
     let mut puzzle = [[0; 9]; 9];
     for (row, line) in input.lines().enumerate() {
-        for col in 0..9 {
-            puzzle[row][col] = line[col..col + 1].parse().expect("failed to parse digit");
+        for (col, c) in line.chars().enumerate() {
+            puzzle[row][col] = c.to_digit(10).expect("failed to parse digit");
         }
     }
 
